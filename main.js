@@ -24,27 +24,33 @@ function startGame() {
     questionContainerElement.classList.remove("hide");
     setNextQuestion();
   }
-  
-  function showQuestion(question) {
+  function shuffleArray(answerArray) {
+    for (let i = answerArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [answerArray[i], answerArray[j]] = [answerArray[j], answerArray[i]];
+    }
+    return answerArray;
+}
+function showQuestion(question) {
     questionElement.innerText = question.question;
-    const answers = []
-    answers.push({text:question.correct_answer, correct:true})
+    const answers = [];
+    answers.push({ text: question.correct_answer, correct: true });
     question.incorrect_answers.forEach((answer) => {
-        answers.push({text:answer})
-    })
-    console.log(answers)
-    answers.forEach((answer) => {
-      const button = document.createElement("button");
-      button.innerText = answer.text;
-  
-      if (answer.correct) {
-        button.dataset.correct = true;
-    
-      }
-      button.addEventListener("click", selectAnswer);
-      answerButtonsElement.appendChild(button);
+        answers.push({ text: answer });
     });
 
+    shuffleArray(answers);
+
+    answers.forEach((answer) => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+
+        if (answer.correct) {
+            button.dataset.correct = true;
+        }
+        button.addEventListener("click", selectAnswer);
+        answerButtonsElement.appendChild(button);
+    });
 }
     
     function setNextQuestion() {
