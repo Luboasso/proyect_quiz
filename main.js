@@ -27,22 +27,25 @@ function startGame() {
   
   function showQuestion(question) {
     questionElement.innerText = question.question;
-    let answers = []
+    const answers = []
     answers.push({text:question.correct_answer, correct:true})
     question.incorrect_answers.forEach((answer) => {
-        answers.push({text:answer, correct: false})
+        answers.push({text:answer})
     })
     console.log(answers)
-
+    answers.forEach((answer) => {
       const button = document.createElement("button");
       button.innerText = answer.text;
   
-      if (answers.correct) {
+      if (answer.correct) {
         button.dataset.correct = true;
+    
       }
       button.addEventListener("click", selectAnswer);
       answerButtonsElement.appendChild(button);
-    };
+    });
+
+}
     
     function setNextQuestion() {
         resetState();
@@ -50,12 +53,16 @@ function startGame() {
         
         }
 
-        function resetState() {
-            nextButton.classList.add("hide");
-            answerButtonsElement.innerHTML=""
+        function setStatusClass(button) {
+            if (button.dataset.correct) {
+              button.classList.add("correct");
+            } else {
+              button.classList.add("wrong");
+            }
           }
-  
-          function selectAnswer() {
+          
+        
+          function selectAnswer() { console.log(answerButtonsElement.children)
             Array.from(answerButtonsElement.children).forEach((button) => {
               setStatusClass(button);
             });
@@ -67,6 +74,10 @@ function startGame() {
             }
           }
           
+function resetState() {
+            nextButton.classList.add("hide");
+            answerButtonsElement.innerHTML=""
+          }
 
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
