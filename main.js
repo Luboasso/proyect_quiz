@@ -40,7 +40,7 @@ function startGame() {
       if (answers.correct) {
         button.dataset.correct = true;
       }
-    //   button.addEventListener("click", selectAnswer);
+      button.addEventListener("click", selectAnswer);
       answerButtonsElement.appendChild(button);
     };
     
@@ -55,6 +55,19 @@ function startGame() {
             answerButtonsElement.innerHTML=""
           }
   
+          function selectAnswer() {
+            Array.from(answerButtonsElement.children).forEach((button) => {
+              setStatusClass(button);
+            });
+            if (questions.length > currentQuestionIndex + 1) {
+              nextButton.classList.remove("hide");
+            } else {
+              startButton.innerText = "Restart";
+              startButton.classList.remove("hide");
+            }
+          }
+          
+
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
