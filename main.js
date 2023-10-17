@@ -3,7 +3,7 @@ const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
-
+const progressBar = document.getElementById("progress-bar");
 let questions = []
 let currentQuestionIndex;
 
@@ -21,6 +21,7 @@ getQuestion ();
 function startGame() {
     startButton.classList.add("hide");
     currentQuestionIndex = 0;
+    progressBar.style.width = "0%";
     questionContainerElement.classList.remove("hide");
     setNextQuestion();
   }
@@ -73,6 +74,12 @@ function showQuestion(question) {
               setStatusClass(button);
             });
             if (questions.length > currentQuestionIndex + 1) {
+              nextButton.classList.remove("hide");
+              const increment = 10;
+              let currentProgress = parseInt(progressBar.style.width);
+              currentProgress += increment;
+              progressBar.style.width = `${currentProgress}%`;
+              
               nextButton.classList.remove("hide");
             } else {
               startButton.innerText = "Restart";
