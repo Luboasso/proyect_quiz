@@ -4,7 +4,7 @@ const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const progressBar = document.getElementById("progress-bar");
-const scoreCardElement = document.querySelector(".score-card");
+const scoreCardElement = document.getElementById("score-card");
 const welcomeCardElement =  document.getElementById("welcome-card");
 const quizCardElement =  document.getElementById("quiz-div");
 const questionTitle =  document.getElementById("question-title");
@@ -98,7 +98,7 @@ function showQuestion(question) {
             } else { 
               setTimeout(() => {
                 showScoreCard(); 
-              }, 3000); 
+              }, 2000); 
           
               
               nextButton.classList.add("hide");
@@ -116,7 +116,7 @@ function showScoreCard() {
     startButton.innerHTML = "Restart";
     startButton.classList.remove("hide");
   
-    document.getElementById("score").textContent = correctAnswers;
+    document.getElementById("score").innerHTML = correctAnswers;
     const correctAnswersList = document.getElementById("correct-answers");
     correctAnswersList.innerHTML = "";
   
