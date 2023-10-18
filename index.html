@@ -7,10 +7,17 @@
     <link rel="stylesheet" href="bootstrap.min.css">
 </head>
 <body>
-  <div id="welcome-card" class="card text-center col align-items-center">
-    <h1>Welcome to the Quiz!</h1>
+  <div id="welcome-card" class="">
+<div class="col vh-100 d-flex justify-content-center align-items-center">
+  <div class="card border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl " style="width: 35%; height: 50vh;">
+  <div id="welcome-header" class="card-header bg-primary"></div>
+  <div class="card-body px-3 d-flex flex-column align-items-center">
+ <h1>Welcome to the Quiz!</h1>
     <p>Press "Start" to begin the quiz.</p>
     <button id="start-btn" class="btn btn-primary">Start</button>
+      </div>
+    </div>
+    </div>
   </div>
 
 
@@ -22,7 +29,7 @@
 
   <div class="col vh-100 d-flex justify-content-center align-items-center">
   <div class="card border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl " style="width: 35%; height: 50vh;">
-  <div id="question-title" class="card-header bg-primary">Question</div>
+  <div id="question-title" class="card-header bg-primary text-light">Question</div>
   <div class="card-body px-3 d-flex flex-column align-items-center">
     <h4 id="question" class="card-title">question</h4>
 
