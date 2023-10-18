@@ -28,3 +28,10 @@ body {
   .wrong {
     background-color: rgb(255, 0, 0) !important;
   } 
+
+  #header {
+    margin-top: 0; /* Remove top margin */
+}
+#welcome-card {
+    margin-top: 0; /* Remove top margin */
+}
