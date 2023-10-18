@@ -4,8 +4,15 @@ const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const progressBar = document.getElementById("progress-bar");
+const scoreCardElement = document.querySelector(".score-card");
+const welcomeCardElement =  document.getElementById("welcome-card");
+const quizCardElement =  document.getElementById("quiz-div");
+const questionTitle =  document.getElementById("question-title");
 let questions = []
 let currentQuestionIndex;
+let correctAnswers = 0;
+
+
 
 function getQuestion () {
 axios
@@ -20,8 +27,11 @@ getQuestion ();
 
 function startGame() {
     startButton.classList.add("hide");
+    welcomeCardElement.classList.add("hide")
     currentQuestionIndex = 0;
+    correctAnswers = 0;
     progressBar.style.width = "0%";
+    quizCardElement.classList.remove("hide");
     questionContainerElement.classList.remove("hide");
     setNextQuestion();
   }
@@ -33,8 +43,9 @@ function startGame() {
     return answerArray;
 }
 function showQuestion(question) {
-    questionElement.innerText = question.question;
+    questionElement.innerHTML = question.question;
     const answers = [];
+    questionTitle.innerHTML = `Question ${currentQuestionIndex + 1}`
     answers.push({ text: question.correct_answer, correct: true });
     question.incorrect_answers.forEach((answer) => {
         answers.push({ text: answer });
@@ -44,8 +55,8 @@ function showQuestion(question) {
 
     answers.forEach((answer) => {
         const button = document.createElement("button");
-        button.innerText = answer.text;
-
+        button.innerHTML = answer.text;
+        button.classList.add("btn", "btn-outline-dark", "m-2");
         if (answer.correct) {
             button.dataset.correct = true;
         }
@@ -60,7 +71,7 @@ function showQuestion(question) {
         
         }
 
-        function setStatusClass(button) {
+        function setStatusClass(button) { console.log(button)
             if (button.dataset.correct) {
               button.classList.add("correct");
             } else {
@@ -69,29 +80,61 @@ function showQuestion(question) {
           }
           
         
-          function selectAnswer() { console.log(answerButtonsElement.children)
-            Array.from(answerButtonsElement.children).forEach((button) => {
-              setStatusClass(button);
-            });
+          function selectAnswer(event) {
+            const selectedButton = event.target;
+            
+            setStatusClass(selectedButton);
+          
+           
             if (questions.length > currentQuestionIndex + 1) {
-              nextButton.classList.remove("hide");
-              const increment = 10;
+                const increment = 10;
               let currentProgress = parseInt(progressBar.style.width);
               currentProgress += increment;
               progressBar.style.width = `${currentProgress}%`;
+              setTimeout(() => {
+                currentQuestionIndex++;
+                setNextQuestion();
+              }, 1000); 
+            } else { 
+              setTimeout(() => {
+                showScoreCard(); 
+              }, 3000); 
+          
               
-              nextButton.classList.remove("hide");
-            } else {
+              nextButton.classList.add("hide");
               startButton.innerText = "Restart";
               startButton.classList.remove("hide");
             }
           }
-          
+        
+ 
+function showScoreCard() {
+    quizCardElement.classList.add("hide");
+    questionContainerElement.classList.add("hide");
+    scoreCardElement.classList.remove("hide");
+  
+    startButton.innerHTML = "Restart";
+    startButton.classList.remove("hide");
+  
+    document.getElementById("score").textContent = correctAnswers;
+    const correctAnswersList = document.getElementById("correct-answers");
+    correctAnswersList.innerHTML = "";
+  
+    questions.forEach((question, index) => {
+      if (question.userAnswerIndex === question.correctAnswerIndex) {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `Question ${index + 1}: ${question.correct_answer}`;
+        correctAnswersList.appendChild(listItem);
+      }
+    });
+  }         
+
 function resetState() {
             nextButton.classList.add("hide");
             answerButtonsElement.innerHTML=""
           }
 
+          
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
