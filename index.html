@@ -1,79 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
 </head>
+
 <body>
   <header id="header" class="m-4">
     <div class="d-flex justify-content-center">
-    <img src="miraculous-logo.png" alt="miraculous-logo" style="width: 22vw">
-  </div>
+      <img src="miraculous-logo.png" alt="miraculous-logo" style="width: 22vw">
+    </div>
   </header>
 
   <div id="welcome-card" class="">
-<div class="col d-flex justify-content-center align-items-center">
-  <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl " style="width: 35%; height: 50vh;">
-  <div class="card-body px-3 d-flex flex-column align-items-center justify-content-center">
- <h2>Welcome to the Miraculous Quiz!</h2>
-    <p>You're going to answer a series of 10 questions about Miraculous Ladybug Season 1.</p>
-    <ul>
-    <li>You need at least 7 points to pass.</li>
-      <li>There's no time limit, so you can take as long as you need to.</li>
-    </ul>
-      <h4>Have fun!</h4>
-    <button id="start-btn" class="btn btn-primary">Start</button>
+    <div class="col d-flex justify-content-center align-items-center">
+      <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl "
+        style="width: 35%; height: 50vh;">
+        <div class="card-body px-3 d-flex flex-column align-items-center justify-content-center">
+          <h2>Welcome to the Miraculous Quiz!</h2>
+          <p>You're going to answer a series of 10 questions about Miraculous Ladybug Season 1.</p>
+          <ul>
+            <li>You need at least 7 points to pass.</li>
+            <li>There's no time limit, so you can take as long as you need to.</li>
+          </ul>
+          <h4>Have fun!</h4>
+          <button id="start-btn" class="btn btn-primary">Start</button>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 
 
   <div id="quiz-div" class="hide">
-  <div class="progress mx-5">
-    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
-
-
-  <div class="col d-flex justify-content-center align-items-center p-4">
-  <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl " style="width: 35%; height: 50vh;">
-  <div id="question-title" class="card-header bg-primary text-light">Question</div>
-  <div class="card-body px-3 d-flex flex-column align-items-center">
-    <h4 id="question" class="card-title">question</h4>
-
-    <div id="question-container" class="hide" style="max-width:70%;">
-        <div id="answer-buttons" class="d-flex flex-wrap"></div>
-      </div>
+    <div class="progress mx-5">
+      <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-    
-      <div class="controls px-3">
 
-        <button id="next-btn" class="hide btn btn-primary">Next</button>
-      </div>
-  </div>
-</div>
-</div>
 
-<div id="score-card" class="hide">
-  <div class="col d-flex justify-content-center align-items-center">
-    <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl " style="width: 35%; height: 50vh;">
-    <div class="card-body px-3 d-flex flex-column align-items-center justify-content-center">
-      <h2>Your Score is: <span id="score">0</span></h2>
-      <p>Correct Answers:</p>
-      <ul id="correct-answers"></ul>
+    <div class="col d-flex justify-content-center align-items-center p-4">
+      <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl "
+        style="width: 35%; height: 50vh;">
+        <div id="question-title" class="card-header bg-primary text-light">Question</div>
+        <div class="card-body px-3 d-flex flex-column align-items-center">
+          <h4 id="question" class="card-title">question</h4>
+
+          <div id="question-container" class="hide" style="max-width:70%;">
+            <div id="answer-buttons" class="d-flex flex-wrap"></div>
+          </div>
+        </div>
+
+        <div class="controls px-3">
+
+          <button id="next-btn" class="hide btn btn-primary">Next</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="score-card" class="hide">
+    <div class="col d-flex justify-content-center align-items-center">
+      <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl "
+        style="width: 35%; height: 50vh;">
+        <div class="card-body px-3 d-flex flex-column align-items-center justify-content-center">
+          <img src="ladybug-ew.gif" alt="ladybug-ew-gif" id="ladybug-ew">
+          <img src="ladybug-wink.gif" alt="ladybug-wink-gif" id="ladybug-wink">
+          <img src="marinette-happy.gif" alt="marinette-happy-gif" id="marinette-happy">
+          <img src="marinette-mad.gif" alt="marinette-mad" id="marinette-mad">
+          <h2>Your Score is: <span id="score">0</span></h2>
+          <p>Correct Answers:</p>
+          <ul id="correct-answers"></ul>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="audio-container">
     <audio controls autoplay loop>
-      <source src="miraculous-intro.mp3" type="audio/mpeg" class="hide">
+      <source src="miraculous-intro.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    
-      <script  src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
-        <script src="main.js"></script>
-      
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+  <script src="main.js"></script>
+
 </body>
+
 </html>

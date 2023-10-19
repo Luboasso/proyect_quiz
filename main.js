@@ -5,24 +5,30 @@ const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const progressBar = document.getElementById("progress-bar");
 const scoreCardElement = document.getElementById("score-card");
-const welcomeCardElement =  document.getElementById("welcome-card");
-const quizCardElement =  document.getElementById("quiz-div");
-const questionTitle =  document.getElementById("question-title");
+const welcomeCardElement = document.getElementById("welcome-card");
+const quizCardElement = document.getElementById("quiz-div");
+const questionTitle = document.getElementById("question-title");
+const winkGif = document.getElementById("ladybug-wink");
+const ewGif = document.getElementById("ladybug-ew")
+const marinetteHappy = document.getElementById("marinette-happy");
+const marinetteMad = document.getElementById("marinette-mad");
+
 let questions = []
 let currentQuestionIndex;
 let correctAnswers = 0;
+let userScore = 0;
 
 
-
-function getQuestion () {
-axios
-.get("https://opentdb.com/api.php?amount=10&category=27&difficulty=easy&type=multiple")
-.then((res) => {
-questions = res.data.results,
-console.log(res.data.results)})
-.catch((err) => console.error(err));
+function getQuestion() {
+    axios
+        .get("https://opentdb.com/api.php?amount=10&category=32&difficulty=easy&type=multiple")
+        .then((res) => {
+            questions = res.data.results,
+                console.log(res.data.results)
+        })
+        .catch((err) => console.error(err));
 }
-getQuestion ();
+getQuestion();
 
 
 function startGame() {
@@ -34,8 +40,8 @@ function startGame() {
     quizCardElement.classList.remove("hide");
     questionContainerElement.classList.remove("hide");
     setNextQuestion();
-  }
-  function shuffleArray(answerArray) {
+}
+function shuffleArray(answerArray) {
     for (let i = answerArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [answerArray[i], answerArray[j]] = [answerArray[j], answerArray[i]];
@@ -64,79 +70,84 @@ function showQuestion(question) {
         answerButtonsElement.appendChild(button);
     });
 }
-    
-    function setNextQuestion() {
-        resetState();
-        showQuestion(questions[currentQuestionIndex]);
-        
-        }
 
-        function setStatusClass(button) { console.log(button)
-            if (button.dataset.correct) {
-              button.classList.add("correct");
-            } else {
-              button.classList.add("wrong");
-            }
-          }
-          
-        
-          function selectAnswer(event) {
-            const selectedButton = event.target;
-            
-            setStatusClass(selectedButton);
-          
-           
-            if (questions.length > currentQuestionIndex + 1) {
-                const increment = 10;
-              let currentProgress = parseInt(progressBar.style.width);
-              currentProgress += increment;
-              progressBar.style.width = `${currentProgress}%`;
-              setTimeout(() => {
-                currentQuestionIndex++;
-                setNextQuestion();
-              }, 1000); 
-            } else { 
-              setTimeout(() => {
-                showScoreCard(); 
-              }, 2000); 
-          
-              
-              nextButton.classList.add("hide");
-              startButton.innerText = "Restart";
-              startButton.classList.remove("hide");
-            }
-          }
-        
- 
+function setNextQuestion() {
+    resetState();
+    showQuestion(questions[currentQuestionIndex]);
+
+}
+
+function setStatusClass(button) {
+    console.log(button)
+    if (button.dataset.correct) {
+        button.classList.add("correct");
+    } else {
+        button.classList.add("wrong");
+    }
+}
+
+
+function selectAnswer(event) {
+    const selectedButton = event.target;
+
+    setStatusClass(selectedButton);
+
+    if (selectedButton.dataset.correct === "true") {
+        userScore++;
+    }
+
+    if (questions.length > currentQuestionIndex + 1) {
+        const increment = 10;
+        let currentProgress = parseInt(progressBar.style.width);
+        currentProgress += increment;
+        progressBar.style.width = `${currentProgress}%`;
+        setTimeout(() => {
+            currentQuestionIndex++;
+            setNextQuestion();
+        }, 1000);
+    } else {
+        setTimeout(() => {
+            showScoreCard();
+        }, 2000);
+
+
+        nextButton.classList.add("hide");
+        startButton.innerText = "Restart";
+        startButton.classList.remove("hide");
+        document.getElementById("score").innerHTML = userScore;
+    }
+}
+
+
 function showScoreCard() {
     quizCardElement.classList.add("hide");
     questionContainerElement.classList.add("hide");
     scoreCardElement.classList.remove("hide");
-  
+
     startButton.innerHTML = "Restart";
     startButton.classList.remove("hide");
-  
+
     document.getElementById("score").innerHTML = correctAnswers;
     const correctAnswersList = document.getElementById("correct-answers");
     correctAnswersList.innerHTML = "";
-  
+
     questions.forEach((question, index) => {
-      if (question.userAnswerIndex === question.correctAnswerIndex) {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `Question ${index + 1}: ${question.correct_answer}`;
-        correctAnswersList.appendChild(listItem);
-      }
+        if (question.userAnswerIndex === question.correctAnswerIndex) {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `Question ${index + 1}: ${question.correct_answer}`;
+            correctAnswersList.appendChild(listItem);
+        }
     });
-  }         
+}
 
 function resetState() {
-            nextButton.classList.add("hide");
-            answerButtonsElement.innerHTML=""
-          }
+    nextButton.classList.add("hide");
+    answerButtonsElement.innerHTML = ""
+}
 
-          
+
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
-  currentQuestionIndex++;
-  setNextQuestion();
+    currentQuestionIndex++;
+    setNextQuestion();
 });
