@@ -1,0 +1,27 @@
+
+body {
+    background-image: url("../assets/polka_dot.jpg");
+    background-color: #cccccc;
+    background-size: auto;
+   }
+
+ .gif {
+    width: 30px;
+ }
+   
+.hide{
+    display: none;
+    }
+
+.correct {
+    background-color: rgb(0, 255, 72) !important;
+  }
+  
+  .wrong {
+    background-color: rgb(255, 0, 0) !important;
+  }
+
+
+.audio-container {
+    visibility: hidden;
+  }

@@ -105,7 +105,8 @@ function selectAnswer(event) {
             setNextQuestion();
         }, 1000);
     } else {
-        progressBar.style.width = `${100}%`;        setTimeout(() => {
+        progressBar.style.width = `${100}%`;
+        setTimeout(() => {
             showScoreCard();
         }, 2000);
 
@@ -122,11 +123,11 @@ function showScoreCard() {
     scoreCardElement.classList.remove("hide");
 
     restartButton.addEventListener("click", () => {
-        
+
         welcomeCardElement.classList.remove("hide")
         startButton.classList.remove("hide");
         scoreCardElement.classList.add("hide");
-      });
+    });
 
     score.innerText = userScore;
     console.log(userScore)
