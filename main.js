@@ -13,7 +13,9 @@ const ewGif = document.getElementById("ladybug-ew")
 const marinetteHappy = document.getElementById("marinette-happy");
 const marinetteMad = document.getElementById("marinette-mad");
 const score = document.getElementById("score")
-
+const failedText = document.getElementById("failed-text")
+const passedText = document.getElementById("passed-text")
+const restartButton = document.getElementById("restart-btn");
 let questions = []
 let currentQuestionIndex;
 let userScore = 0;
@@ -62,7 +64,7 @@ function showQuestion(question) {
     answers.forEach((answer) => {
         const button = document.createElement("button");
         button.innerHTML = answer.text;
-        button.classList.add("btn", "btn-outline-dark", "m-2");
+        button.classList.add("btn", "btn-outline-dark", "m-2", "w-100");
         if (answer.correct) {
             button.dataset.correct = true;
         }
@@ -103,7 +105,7 @@ function selectAnswer(event) {
             setNextQuestion();
         }, 1000);
     } else {
-        setTimeout(() => {
+        progressBar.style.width = `${100}%`;        setTimeout(() => {
             showScoreCard();
         }, 2000);
 
@@ -119,33 +121,45 @@ function showScoreCard() {
     questionContainerElement.classList.add("hide");
     scoreCardElement.classList.remove("hide");
 
-    startButton.innerHTML = "Restart";
-    startButton.classList.remove("hide");
+    restartButton.addEventListener("click", () => {
+        
+        welcomeCardElement.classList.remove("hide")
+        startButton.classList.remove("hide");
+        scoreCardElement.classList.add("hide");
+      });
 
- score.innerText = userScore;
- console.log(userScore)
+    score.innerText = userScore;
+    console.log(userScore)
 
-     if (userScore <= 2) {
+    if (userScore <= 2) {
         ewGif.classList.add("hide");
         winkGif.classList.add("hide");
         marinetteHappy.classList.add("hide");
         marinetteMad.classList.remove("hide");
+        failedText.classList.remove("hide");
+        passedText.classList.add("hide");
     } else if (userScore >= 3 && userScore < 7) {
         ewGif.classList.remove("hide");
         winkGif.classList.add("hide");
         marinetteHappy.classList.add("hide");
         marinetteMad.classList.add("hide");
-    } else if (userScore >= 7) {
+        failedText.classList.remove("hide");
+        passedText.classList.add("hide");
+    } else if (userScore >= 7 && userScore <= 8) {
         ewGif.classList.add("hide");
         winkGif.classList.remove("hide");
-        marinetteHappy.classList.remove("hide");
+        marinetteHappy.classList.add("hide");
         marinetteMad.classList.add("hide");
+        failedText.classList.add("hide");
+        passedText.classList.remove("hide");
     } else if (userScore >= 9) {
         ewGif.classList.add("hide");
         winkGif.classList.add("hide");
         marinetteHappy.classList.remove("hide");
         marinetteMad.classList.add("hide");
-}
+        failedText.classList.add("hide");
+        passedText.classList.remove("hide");
+    }
 }
 
 function resetState() {
@@ -157,5 +171,7 @@ function resetState() {
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
     currentQuestionIndex++;
+    button.classList.remove("disabled")
+
     setNextQuestion();
 });

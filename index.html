@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Miraculous Quiz</title>
   <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="icon" type="image/jpeg" href="ladybug-icon.jpg">
 </head>
 
 <body>
@@ -27,7 +28,7 @@
             <li>There's no time limit, so you can take as long as you need to.</li>
           </ul>
           <h4>Have fun!</h4>
-          <button id="start-btn" class="btn btn-primary">Start</button>
+          <button id="start-btn" class="btn btn-primary mt-4">Start</button>
         </div>
       </div>
     </div>
@@ -48,8 +49,8 @@
         <div class="card-body px-3 d-flex flex-column align-items-center">
           <h4 id="question" class="card-title">question</h4>
 
-          <div id="question-container" class="hide" style="max-width:70%;">
-            <div id="answer-buttons" class="d-flex flex-wrap"></div>
+          <div id="question-container" class="hide d-grid" style="max-width:70%">
+            <div id="answer-buttons" class="col"></div>
           </div>
         </div>
 
@@ -66,14 +67,16 @@
       <div class="card border-3 border-dark mb-3 shadow-lg pb-3 mb-5 bg-white rounded z-depth-3 shadow-intensity-xl "
         style="width: 35%; height: 50vh;">
         <div class="card-body px-3 d-flex flex-column align-items-center justify-content-center">
-          <img src="ladybug-ew.gif" alt="ladybug-ew-gif" id="ladybug-ew" class="gif mb-4" style="width: 32vw">
-          <img src="ladybug-wink.gif" alt="ladybug-wink-gif" id="ladybug-wink" class="hide gif mb-2"
-            style="width: 14vw">
-          <img src="marinette-happy.gif" alt="marinette-happy-gif" id="marinette-happy" class="hide gif mb-4"
-            style="width: 32vw">
-          <img src="marinette-mad.gif" alt="marinette-mad" id="marinette-mad" class="hide gif mb-3" style="width: 20vw">
-          <h2>Your Score is: <span id="score"></span></h2>
 
+          <h2>Your Score is: <span id="score"></span></h2>
+          <img src="ladybug-ew.gif" alt="ladybug-ew-gif" id="ladybug-ew" class="gif mb-4" style="width: 26vw">
+          <img src="ladybug-wink.gif" alt="ladybug-wink-gif" id="ladybug-wink" class="hide gif mb-2" style="width: 8vw">
+          <img src="marinette-happy.gif" alt="marinette-happy-gif" id="marinette-happy" class="hide gif mb-4"
+            style="width: 26vw">
+          <img src="marinette-mad.gif" alt="marinette-mad" id="marinette-mad" class="hide gif mb-3" style="width: 20vw">
+          <h3 id="failed-text" class="hide">You Failed!</h3>
+          <h3 id="passed-text" class="hide">You Passed!</h3>
+          <button id="restart-btn" class="btn btn-primary">Restart</button>
         </div>
       </div>
     </div>
