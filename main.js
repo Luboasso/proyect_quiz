@@ -12,10 +12,10 @@ const winkGif = document.getElementById("ladybug-wink");
 const ewGif = document.getElementById("ladybug-ew")
 const marinetteHappy = document.getElementById("marinette-happy");
 const marinetteMad = document.getElementById("marinette-mad");
+const score = document.getElementById("score")
 
 let questions = []
 let currentQuestionIndex;
-let correctAnswers = 0;
 let userScore = 0;
 
 
@@ -35,7 +35,7 @@ function startGame() {
     startButton.classList.add("hide");
     welcomeCardElement.classList.add("hide")
     currentQuestionIndex = 0;
-    correctAnswers = 0;
+    userScore = 0;
     progressBar.style.width = "0%";
     quizCardElement.classList.remove("hide");
     questionContainerElement.classList.remove("hide");
@@ -80,7 +80,8 @@ function setNextQuestion() {
 function setStatusClass(button) {
     console.log(button)
     if (button.dataset.correct) {
-        button.classList.add("correct");
+        button.classList.add("correct")
+        userScore++;
     } else {
         button.classList.add("wrong");
     }
@@ -91,10 +92,6 @@ function selectAnswer(event) {
     const selectedButton = event.target;
 
     setStatusClass(selectedButton);
-
-    if (selectedButton.dataset.correct === "true") {
-        userScore++;
-    }
 
     if (questions.length > currentQuestionIndex + 1) {
         const increment = 10;
@@ -112,8 +109,6 @@ function selectAnswer(event) {
 
 
         nextButton.classList.add("hide");
-        startButton.innerText = "Restart";
-        startButton.classList.remove("hide");
         document.getElementById("score").innerHTML = userScore;
     }
 }
@@ -127,17 +122,30 @@ function showScoreCard() {
     startButton.innerHTML = "Restart";
     startButton.classList.remove("hide");
 
-    document.getElementById("score").innerHTML = correctAnswers;
-    const correctAnswersList = document.getElementById("correct-answers");
-    correctAnswersList.innerHTML = "";
+ score.innerText = userScore;
+ console.log(userScore)
 
-    questions.forEach((question, index) => {
-        if (question.userAnswerIndex === question.correctAnswerIndex) {
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `Question ${index + 1}: ${question.correct_answer}`;
-            correctAnswersList.appendChild(listItem);
-        }
-    });
+     if (userScore <= 2) {
+        ewGif.classList.add("hide");
+        winkGif.classList.add("hide");
+        marinetteHappy.classList.add("hide");
+        marinetteMad.classList.remove("hide");
+    } else if (userScore >= 3 && userScore < 7) {
+        ewGif.classList.remove("hide");
+        winkGif.classList.add("hide");
+        marinetteHappy.classList.add("hide");
+        marinetteMad.classList.add("hide");
+    } else if (userScore >= 7) {
+        ewGif.classList.add("hide");
+        winkGif.classList.remove("hide");
+        marinetteHappy.classList.remove("hide");
+        marinetteMad.classList.add("hide");
+    } else if (userScore >= 9) {
+        ewGif.classList.add("hide");
+        winkGif.classList.add("hide");
+        marinetteHappy.classList.remove("hide");
+        marinetteMad.classList.add("hide");
+}
 }
 
 function resetState() {
