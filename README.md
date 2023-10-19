@@ -1,4 +1,4 @@
-# Miraculous Ladybug Quiz Game
+# Miraculous Ladybug Quiz Game🐞
 
 Welcome to the Miraculous Ladybug Quiz Game! This is a web-based quiz game where players answer questions about the "Miraculous Ladybug" TV series.
 
@@ -27,7 +27,7 @@ The Miraculous Ladybug Quiz Game is a fun and interactive quiz that tests your k
 - An instrumental version of the Miraculous Ladybug intro song plays automatically during the game.
 
 
-## Requirements
+## Requirements ❗
 These were the requirements for the development of this proyect
 - Dynamic DOM manipulation
 - Create a Single Page Application (SPA) for questions
@@ -38,7 +38,7 @@ These were the requirements for the development of this proyect
 - README with project explanation
 
 
-## Getting Started
+## Getting Started 🔧
 
 To get started with the Miraculous Ladybug Quiz Game, follow these steps:
 
