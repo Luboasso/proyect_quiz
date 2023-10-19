@@ -16,6 +16,7 @@ const score = document.getElementById("score")
 const failedText = document.getElementById("failed-text")
 const passedText = document.getElementById("passed-text")
 const restartButton = document.getElementById("restart-btn");
+const audioDiv = document.querySelector(".audio-div");
 let questions = []
 let currentQuestionIndex;
 let userScore = 0;
@@ -34,6 +35,9 @@ getQuestion();
 
 
 function startGame() {
+    audioDiv.innerHTML = ` <audio autoplay>
+    <source src="../assets/miraculous-intro.mp3" type="audio/mpeg">
+    </audio>`;
     startButton.classList.add("hide");
     welcomeCardElement.classList.add("hide")
     currentQuestionIndex = 0;
